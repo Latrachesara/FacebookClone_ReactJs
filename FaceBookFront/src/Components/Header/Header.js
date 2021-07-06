@@ -1,6 +1,6 @@
 //import material from https://material-ui.com
 import React from 'react'
-import './header.css'
+import './../../Style/header.css'
 import SearchIcon from '@material-ui/icons/Search'
 import HomeIcon from '@material-ui/icons/Home'
 import FlagIcon from '@material-ui/icons/Flag'

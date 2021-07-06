@@ -1,6 +1,6 @@
 import React from 'react'
-import "./Login.css";
-import { auth, provider } from "./firebase";
+import "./../../Style/Login.css";
+import { auth, provider } from "../../firebase";
 function Login() {
     const signIn =() => {
         // sign in ...

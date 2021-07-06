@@ -6,7 +6,7 @@ import SotrefrontIcon from "@material-ui/icons/Storefront";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import React from "react";
-import "./SideBar.css";
+import "./../../Style/SideBar.css";
 import SideBarRow from "./SideBarRow";
 function SideBar() {
   return (

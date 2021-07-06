@@ -1,5 +1,5 @@
 import React from "react";
-import "./Widgets.css";
+import "./../../Style/Widgets.css";
 function Widgets() {
   return (
     <div className="widgets">

@@ -1,6 +1,6 @@
 import { Avatar } from '@material-ui/core'
 import React from 'react'
-import   "./SideBarRow.css"
+import   "./../../Style/SideBarRow.css"
 function SideBarRow({src , Icon , title}) {
     return (
         <div className="sidebarRow">
