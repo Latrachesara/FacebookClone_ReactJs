@@ -1,6 +1,7 @@
 const user = require("./../Models/UserModel");
 const bcrypt = require("bcrypt");
-const { SendEmail } = require("./../Outils/EmailSender");
+const SendEmail  = require("./../Outils/EmailSender");
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const createAccessToken = (payload) => {
@@ -90,21 +91,28 @@ const AuthControllers = {
           .status(400)
           .json({ message: "there is no user with this email" });
       }
-      const resetPasswordToken = buffer.toString("hex");
+      
+      var resetPasswordToken = ""
+     await crypto.randomBytes(32, (err, buffer) => {
+        resetPasswordToken = buffer.toString("hex");
+      })
+      console.log(resetPasswordToken)
       User.resetPasswordToken = resetPasswordToken;
       User.resetPasswordExpires = Date.now() + 3600000;
       User.save().then(async (User) => {
+        console.log(User)
         const EmailData = {
           email: User.email,
           subject: "ResetPassword Email",
           text: `<p>ResetPassword <a href="http://localhost:3000/resetPassword/${User._id}/${User.resetPasswordToken}">link</a></p>`,
         };
-        const EmailSent = await SendEmail(EmailData);
-        if (EmailSent) {
-          return res.status(200).json({ message: "email send Successfully" });
-        } else {
-          return res.status(400).json({ message: "email doesnt send" });
-        }
+        const EmailSent = await SendEmail(EmailData, res);
+        
+         
+      }) .catch((err) => {
+        console.log(err)
+        return res.status(400).json({ message: "failed reset password" });
+
       });
     } catch (error) {
       return res.status(400).json({ message: error.message });

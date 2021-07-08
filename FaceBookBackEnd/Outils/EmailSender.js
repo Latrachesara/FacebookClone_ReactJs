@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const SendEmail = async (data) => {
+const SendEmail = async (data, res) => {
   console.log(data)
   const transporter = nodemailer.createTransport({
     port: 465,
@@ -20,11 +20,11 @@ const SendEmail = async (data) => {
   };
 
   transporter.sendMail(mailData, (error, info) => {
-    console.log(error, info)
+    
     if (error) {
-      console.log(error)
-      return false;
-    } else return true;
+      return res.status(400).json(error);
+    
+    } else return res.status(200).json(info);
   });
 };
 module.exports = SendEmail;

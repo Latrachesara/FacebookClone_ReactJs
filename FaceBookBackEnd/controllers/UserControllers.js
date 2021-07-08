@@ -26,14 +26,8 @@ const UserControllers = {
         subject: "Verfication Email",
         text: `<p>Verfication <a href="http://localhost:3000/verifEamil/${exist._id}">link</a></p>`,
       };
-      const EmailSent = await SendEmail(EmailData);
-      console.log(EmailSent)
-      if (EmailSent) {
-        
-        return res.status(200).json({ message: "email send Successfully" });
-      } else {
-        return res.status(400).json({ message: "email doesnt send" });
-      }
+      const EmailSent = await SendEmail(EmailData, res);
+   
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
