@@ -122,10 +122,13 @@ const AuthControllers = {
     }
   },
   VerifeResetPasswordToken: async (req, res) => {
-    const User = await user.findOne({
-      resetPasswordToken: req.params.resetPasswordToken,
-      resetPasswordTokenExpires: { $gt: Date.now() },
-    });
+    const User = await user
+      .findOne({
+        resetPasswordToken: req.params.resetPasswordToken,
+        resetPasswordExpires: { $gt: Date.now() },
+      })
+      .lean();
+    console.log(User);
     if (!User) {
       return res.status(400).json({ message: "Token expired" });
     }
@@ -139,6 +142,9 @@ const AuthControllers = {
     });
     if (!User) {
       return res.status(404).json({ message: "user not found" });
+    }
+    if (password.length < 8) {
+      return res.status(400).json({ message: "Password less than 8 char !" });
     }
     const passwordHashed = await bcrypt.hash(password, 12);
     User.password = passwordHashed;

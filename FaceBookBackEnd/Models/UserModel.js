@@ -8,7 +8,7 @@ const user = mongoose.Schema({
   gendre: { type: String, required: false },
   phoneNumber: { type: Number, required: false },
   isVerified: { type: Boolean, default: false },
-  resetPasswordToken: { type: String, required: false },
-  resetPasswordExpires: { type: Date, required: false },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 module.exports = mongoose.model("user", user);

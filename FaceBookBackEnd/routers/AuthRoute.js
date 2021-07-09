@@ -12,6 +12,6 @@ router.post(
   "/verifeResetPasswordToken/:resetPasswordToken",
   AuthControllers.VerifeResetPasswordToken
 );
-router.post("/newPassword/:resetPasswordToken", AuthControllers.newPassword);
+router.post("/newPassword/:resetPasswordToken",   AuthControllers.newPassword);
 
 module.exports = router;
