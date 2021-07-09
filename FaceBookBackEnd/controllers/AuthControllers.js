@@ -1,8 +1,9 @@
 const user = require("./../Models/UserModel");
 const bcrypt = require("bcrypt");
-const SendEmail  = require("./../Outils/EmailSender");
+const SendEmail = require("./../Outils/EmailSender");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const { validationResult } = require("express-validator");
 require("dotenv").config();
 const createAccessToken = (payload) => {
   return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
@@ -11,8 +12,13 @@ const createAccessToken = (payload) => {
 };
 const AuthControllers = {
   Register: async (req, res) => {
-    const { firstName, lastName, birthDate ,gendre , password, email } = req.body;
+    const { firstName, lastName, birthDate, gendre, password, email } =
+      req.body;
     try {
+      const Errors = validationResult(req);
+      if (!Errors.isEmpty()) {
+        return res.status(400).json({ message: Errors.errors[0].msg });
+      }
       const exist = await user.findOne({ email });
 
       if (exist) {
@@ -30,11 +36,11 @@ const AuthControllers = {
         //birthDate,
         gendre,
         password: passwordHashed,
-        email
+        email,
       });
       newUser
         .save()
-        .then( async(user) => {
+        .then(async (user) => {
           const token = await createAccessToken({ id: user._id });
           res.cookie("accessToken", token, {
             httpOnly: true,
@@ -46,9 +52,8 @@ const AuthControllers = {
             .json({ message: "user created successfully", token });
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           return res.status(400).json({ message: "user doesnt created" });
-  
         });
     } catch (error) {
       return res.status(400).json({ message: error.message });
@@ -81,40 +86,38 @@ const AuthControllers = {
     res.clearCookie("token", { path: "/" });
     res.status(200).json({ message: "user logout" });
   },
+
   ResetPassword: async (req, res) => {
     const email = req.body.email;
     try {
       const User = await user.findOne({ email });
-
+      console.log(User);
       if (!User) {
         return res
           .status(400)
           .json({ message: "there is no user with this email" });
       }
-      
-      var resetPasswordToken = ""
-     await crypto.randomBytes(32, (err, buffer) => {
-        resetPasswordToken = buffer.toString("hex");
-      })
-      console.log(resetPasswordToken)
+
+      var resetPasswordToken = await crypto.randomBytes(32).toString("hex");
+      console.log(resetPasswordToken);
       User.resetPasswordToken = resetPasswordToken;
       User.resetPasswordExpires = Date.now() + 3600000;
-      User.save().then(async (User) => {
-        console.log(User)
-        const EmailData = {
-          email: User.email,
-          subject: "ResetPassword Email",
-          text: `<p>ResetPassword <a href="http://localhost:3000/resetPassword/${User._id}/${User.resetPasswordToken}">link</a></p>`,
-        };
-        const EmailSent = await SendEmail(EmailData, res);
-        
-         
-      }) .catch((err) => {
-        console.log(err)
-        return res.status(400).json({ message: "failed reset password" });
-
-      });
+      User.save()
+        .then(async (user) => {
+          console.log(user);
+          const EmailData = {
+            email: user.email,
+            subject: "ResetPassword Email",
+            text: `<p>ResetPassword <a href="http://localhost:3000/resetPassword/${user._id}/${user.resetPasswordToken}">link</a></p>`,
+          };
+          const EmailSent = await SendEmail(EmailData, res);
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(400).json({ message: "failed reset password" });
+        });
     } catch (error) {
+      console.log(error);
       return res.status(400).json({ message: error.message });
     }
   },

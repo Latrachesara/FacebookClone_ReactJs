@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const AuthControllers = require("./../controllers/AuthControllers");
+const BodyCheck = require("./../middlewares/RegisterBodyCheck");
 
-router.post("/register", AuthControllers.Register);
+
+router.post("/register", BodyCheck, AuthControllers.Register);
 router.post("/login", AuthControllers.login);
 router.post("/logout", AuthControllers.logout);
-router.post("/resetPassword", AuthControllers.ResetPassword);
+router.post("/reset/Password", AuthControllers.ResetPassword);
 router.post(
   "/verifeResetPasswordToken/:resetPasswordToken",
   AuthControllers.VerifeResetPasswordToken
