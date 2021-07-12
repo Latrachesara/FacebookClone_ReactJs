@@ -10,7 +10,7 @@ const MONGODB_OPTIONS = {
 
 mongoose
   .connect(process.env.MONGODB_URI, MONGODB_OPTIONS)
-  .then(() => {
+  .then((data) => {
     console.log("we are connected to db");
   })
   .catch(() => {

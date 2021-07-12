@@ -1,0 +1,84 @@
+.header {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  background-color: white;
+  z-index: 100;
+  top: 0;
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
+}
+.header_left {
+  display: flex;
+  justify-content: space-evenly;
+}
+.header_input {
+  display: flex;
+  align-items: center;
+  background-color: #eff2f5;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 999px;
+}
+.header_right {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header_mid {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.header_left > img {
+  height: 40px;
+}
+
+.header_input > input {
+  border: none;
+  background-color: transparent;
+  outline-width: 0;
+}
+.header_options > .MuiSvgIcon-root {
+  color: gray;
+}
+.header_options:hover > .MuiSvgIcon-root {
+  color: #2e81f4;
+}
+.header_options {
+  display: flex;
+  align-items: center;
+  padding: 0px 30px;
+  cursor: pointer;
+}
+.header_options:hover {
+  background-color: #eff2f5;
+  border-radius: 10px;
+  align-items: center;
+  padding: 0px 30px;
+  border-bottom: none;
+}
+
+.header_options--active > .MuiSvgIcon-root {
+  color: #2e81f4;
+}
+.header_options--active {
+  border-bottom: 4px solid #2e81f4;
+}
+.header_info {
+  display: flex;
+  align-items: center;
+}
+.header_info > h4 {
+  margin-left: 10px;
+}
+.header_right {
+  display: flex;
+}
+.facebook_logo {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px;
+  color: gray;
+}
