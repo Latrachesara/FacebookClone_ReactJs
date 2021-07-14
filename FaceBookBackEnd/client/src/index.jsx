@@ -4,15 +4,20 @@ import "./Style/index.css";
 import App from "./App";
 import { Router, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import DataProvider from "./Redux/Store";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 const history = createBrowserHistory();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router routes={App} history={history}>
-      <Route path="/">
-        <App />
-      </Route>
-    </Router>
+    <DataProvider>
+      <Router routes={App} history={history}>
+        <Route path="/">
+          <App />
+        </Route>
+      </Router>
+    </DataProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

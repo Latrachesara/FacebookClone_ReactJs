@@ -7,5 +7,5 @@ module.exports = [
     .withMessage("Password Must Containt 8 caractaires !"),
     body("firstName").notEmpty().withMessage("FirstName invalid ! "),
     body("lastName").notEmpty().withMessage("lastName invalid ! "),
-    body("gendre").notEmpty().withMessage("gendre is Empty ! "),
+  //  body("gendre").notEmpty().withMessage("gendre is Empty ! "),
 ];

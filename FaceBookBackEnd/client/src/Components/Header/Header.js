@@ -1,5 +1,4 @@
-//import material from https://material-ui.com
-import React from "react";
+import React, { useEffect } from "react";
 import "./../../Style/header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeIcon from "@material-ui/icons/Home";
@@ -13,9 +12,10 @@ import AddIcon from "@material-ui/icons/Add";
 import ForumIcon from "@material-ui/icons/Forum";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
-//function header
-function header() {
+import { useSelector } from "react-redux";
+function Header() {
+  const PICTURES_PATH = process.env.PICTURES_PATH;
+  const { Auth } = useSelector((state) => state);
   return (
     <div className="header">
       <div className="header_left">
@@ -49,8 +49,17 @@ function header() {
 
       <div className="header_right">
         <div className="header_info">
-          <Avatar src="sara_photo.jpg" />
-          <h4>sara latrache</h4>
+          <Avatar
+            src={
+              Auth.user?.profilePicture
+                ? Auth.user?.profilePicture
+                : PICTURES_PATH +
+                "noAvatar.png"
+            }
+          />
+          <h4>
+            {Auth.user?.firstName} {Auth.user?.lastName}
+          </h4>
         </div>
 
         <IconButton>
@@ -73,4 +82,4 @@ function header() {
   );
 }
 
-export default header;
+export default Header;

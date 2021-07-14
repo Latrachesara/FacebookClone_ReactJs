@@ -1,19 +1,20 @@
 const express = require("express");
 const app = express();
+const path = require("path");
+const cookieParser = require("cookie-parser");
 require("./Config/DataBase");
-
 const AuthRoute = require("./routers/AuthRoute");
 const UserRoute = require("./routers/UserRoute");
-
+const cors = require("cors");
 const port = process.env.PORT || 4000;
-
+app.use(express());
+app.use(cors({ origin: [""], credentials: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(AuthRoute);
 app.use(UserRoute);
-
 app.use(express.static("./client/build"));
-
+app.use("/images", express.static(path.join(__dirname, "/images")));
 app.listen(port, () => {
   console.log(`server running on port : ${port}`);
 });

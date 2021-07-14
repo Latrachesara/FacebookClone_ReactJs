@@ -3,7 +3,6 @@ const router = express.Router();
 const AuthControllers = require("./../controllers/AuthControllers");
 const BodyCheck = require("./../middlewares/RegisterBodyCheck");
 
-
 router.post("/register", BodyCheck, AuthControllers.Register);
 router.post("/login", AuthControllers.login);
 router.post("/logout", AuthControllers.logout);
@@ -12,6 +11,6 @@ router.post(
   "/verifeResetPasswordToken/:resetPasswordToken",
   AuthControllers.VerifeResetPasswordToken
 );
-router.post("/newPassword/:resetPasswordToken",   AuthControllers.newPassword);
-
+router.post("/newPassword/:resetPasswordToken", AuthControllers.newPassword);
+router.get("/VerifiLoggedIn", AuthControllers.VerifiLoggedIn);
 module.exports = router;
