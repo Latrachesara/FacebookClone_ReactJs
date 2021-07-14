@@ -9,7 +9,6 @@
   box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
 }
 .header_left {
-  display: flex;
   justify-content: space-evenly;
 }
 .header_input {
@@ -20,61 +19,18 @@
   margin-left: 10px;
   border-radius: 999px;
 }
-.header_right {
-  display: flex;
-  justify-content: space-between;
-}
-
-.header_mid {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-}
-
 .header_left > img {
   height: 40px;
 }
-
 .header_input > input {
   border: none;
   background-color: transparent;
   outline-width: 0;
 }
-.header_options > .MuiSvgIcon-root {
-  color: gray;
-}
-.header_options:hover > .MuiSvgIcon-root {
-  color: #2e81f4;
-}
-.header_options {
-  display: flex;
-  align-items: center;
-  padding: 0px 30px;
-  cursor: pointer;
-}
-.header_options:hover {
-  background-color: #eff2f5;
-  border-radius: 10px;
-  align-items: center;
-  padding: 0px 30px;
-  border-bottom: none;
-}
 
-.header_options--active > .MuiSvgIcon-root {
-  color: #2e81f4;
-}
-.header_options--active {
-  border-bottom: 4px solid #2e81f4;
-}
-.header_info {
-  align-items: center;
-}
 .header_info > h4 {
   margin-left: 10px;
   font-size: 20px;
-}
-.header_right {
-  display: flex;
 }
 .facebook_logo {
   font-size: 20px;
@@ -85,10 +41,7 @@
 .alert-danger-login {
   padding: 10px;
   border-radius: 0.2em;
-  max-width: 10rem;
+  max-width: 30%;
   min-width: 25%;
-}
-.login-button {
-  max-width: 10rem;
-  min-width: 25%;
+  text-align: center;
 }

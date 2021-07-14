@@ -37,5 +37,4 @@ const UserControllers = {
     res.json(Users);
   },
 };
-
 module.exports = UserControllers;

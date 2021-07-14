@@ -29,46 +29,47 @@ function LoggedOutHeader() {
       </div>
 
       <div className="header_right">
-        <div className="header_info row">
-          {" "}
-          {alert.type === "LOGIN" && alert.error === true ? (
-            <div className="aler alert-danger alert-danger-login col-md">
-              {" "}
-              {alert.msg}
+        <div className="container">
+          <div className="header_info row">
+            {alert.type === "LOGIN" && alert.error === true ? (
+              <div className="aler alert-danger alert-danger-login col">
+                {" "}
+                {alert.msg}
+              </div>
+            ) : (
+              <div />
+            )}
+            <div className="header_input col">
+              <input
+                placeholder="UserName"
+                type="text"
+                name="email"
+                onChange={(e) => {
+                  HandleChange(e.target.value, e.target.name);
+                }}
+              />
             </div>
-          ) : (
-            <div />
-          )}
-          <div className="header_input col-md">
-            <input
-              placeholder="UserName"
-              type="text"
-              name="email"
-              onChange={(e) => {
-                HandleChange(e.target.value, e.target.name);
+            <div className="header_input col">
+              {" "}
+              <input
+                placeholder="Password"
+                type="password"
+                name="password"
+                onChange={(e) => {
+                  HandleChange(e.target.value, e.target.name);
+                }}
+              />
+            </div>
+            <Button
+              type="button"
+              className="col login-button"
+              onClick={() => {
+                HandleLogin();
               }}
-            />
+            >
+              Login{" "}
+            </Button>
           </div>
-          <div className="header_input col-md">
-            {" "}
-            <input
-              placeholder="Password"
-              type="password"
-              name="password"
-              onChange={(e) => {
-                HandleChange(e.target.value, e.target.name);
-              }}
-            />
-          </div>
-          <Button
-            type="button"
-            className="col-md login-button"
-            onClick={() => {
-              HandleLogin();
-            }}
-          >
-            Login{" "}
-          </Button>
         </div>
       </div>
     </div>
