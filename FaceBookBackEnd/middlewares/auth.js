@@ -14,7 +14,7 @@ function authrization(req, res, next) {
 
     next();
   } catch (err) {
-    res.status(401).json({ status: "error", message: "Unauthorized" });
+   return res.status(401).json({ status: "error", message: "Unauthorized" });
   }
 }
 
