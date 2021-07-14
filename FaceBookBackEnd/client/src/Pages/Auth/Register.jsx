@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./../../Style/Register.css";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "./../../Redux/actions/AuthActions";
 function Register() {
+  const inistialData = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+  };
+  const [data, setData] = useState(inistialData);
+  const HandleChange = (value, name) => {
+    setData({ ...data, [name]: value });
+  };
+
+  const dispatch = useDispatch();
+  const { alert } = useSelector((state) => state);
+  const HandleSubmit = () => {
+    dispatch(register(data));
+  };
   return (
     <div className=" register">
       <div className="row">
@@ -30,7 +49,10 @@ function Register() {
                       type="text"
                       className="form-control"
                       placeholder="First Name *"
-                      value=""
+                      name="firstName"
+                      onChange={(e) => {
+                        HandleChange(e.target.value, e.target.name);
+                      }}
                     />
                   </div>
                   <div className="form-group">
@@ -38,7 +60,10 @@ function Register() {
                       type="text"
                       className="form-control"
                       placeholder="Last Name *"
-                      value=""
+                      name="lastName"
+                      onChange={(e) => {
+                        HandleChange(e.target.value, e.target.name);
+                      }}
                     />
                   </div>
                   <div className="form-group">
@@ -46,7 +71,10 @@ function Register() {
                       type="password"
                       className="form-control"
                       placeholder="Password *"
-                      value=""
+                      name="password"
+                      onChange={(e) => {
+                        HandleChange(e.target.value, e.target.name);
+                      }}
                     />
                   </div>
                   <div className="form-group">
@@ -54,9 +82,23 @@ function Register() {
                       type="password"
                       className="form-control"
                       placeholder="Confirm Password *"
-                      value=""
+                      name="passwordVerif"
+                      onChange={(e) => {
+                        HandleChange(e.target.value, e.target.name);
+                      }}
                     />
                   </div>
+                  {alert.type === "REGISTER" && alert.error === true ? (
+                    <div className="alert alert-danger topDefault">
+                      {alert.msg}
+                    </div>
+                  ) : alert.error === false ? (
+                    <div className="alert alert-success topDefault">
+                      {alert.msg}
+                    </div>
+                  ) : (
+                    <div />
+                  )}
                 </div>
                 <div className="col-md-6">
                   <div className="form-group">
@@ -64,7 +106,10 @@ function Register() {
                       type="email"
                       className="form-control"
                       placeholder="Your Email *"
-                      value=""
+                      name="email"
+                      onChange={(e) => {
+                        HandleChange(e.target.value, e.target.name);
+                      }}
                     />
                   </div>
                   <div className="form-group">
@@ -75,17 +120,20 @@ function Register() {
                       name="txtEmpPhone"
                       className="form-control"
                       placeholder="Your Phone *"
-                      value=""
+                      name="phoneNumber"
+                      onChange={(e) => {
+                        HandleChange(e.target.value, e.target.name);
+                      }}
                     />
                   </div>
                   <div className="form-group">
                     <select className="form-control">
                       <option className="hidden" selected disabled>
-                        Please select your Sequrity Question
+                        select your gendre
                       </option>
-                      <option>What is your Birthdate?</option>
-                      <option>What is Your old Phone Number</option>
-                      <option>What is your Pet Name?</option>
+                      <option value="men">Men</option>
+                      <option value="women">women</option>
+                      <option value="others">Others</option>
                     </select>
                   </div>
                   <div className="form-group">
@@ -96,97 +144,14 @@ function Register() {
                       value=""
                     />
                   </div>
+
                   <input
-                    type="submit"
+                    type="button"
                     className="btnRegister"
                     value="Register"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              className="tab-pane fade show"
-              id="profile"
-              role="tabpanel"
-              aria-labelledby="profile-tab"
-            >
-              <h3 className="register-heading">Apply as a Hirer</h3>
-              <div className="row register-form">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="First Name *"
-                      value=""
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Last Name *"
-                      value=""
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="email"
-                      className="form-control"
-                      placeholder="Email *"
-                      value=""
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      maxlength="10"
-                      minlength="10"
-                      className="form-control"
-                      placeholder="Phone *"
-                      value=""
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Password *"
-                      value=""
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Confirm Password *"
-                      value=""
-                    />
-                  </div>
-                  <div className="form-group">
-                    <select className="form-control">
-                      <option className="hidden" selected disabled>
-                        Please select your Sequrity Question
-                      </option>
-                      <option>What is your Birthdate?</option>
-                      <option>What is Your old Phone Number</option>
-                      <option>What is your Pet Name?</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="`Answer *"
-                      value=""
-                    />
-                  </div>
-                  <input
-                    type="submit"
-                    className="btnRegister"
-                    value="Register"
+                    onClick={() => {
+                      HandleSubmit();
+                    }}
                   />
                 </div>
               </div>

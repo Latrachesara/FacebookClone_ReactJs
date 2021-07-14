@@ -8,10 +8,21 @@ import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import React from "react";
 import "./../../Style/SideBar.css";
 import SideBarRow from "./SideBarRow";
+import { useSelector } from "react-redux";
+
 function SideBar() {
+  const PICTURES_PATH = process.env.PICTURES_PATH;
+  const { Auth } = useSelector((state) => state);
   return (
     <div className="sidebar">
-      <SideBarRow src="sara_photo.jpg" title="sara latrache" />
+      <SideBarRow
+        src={
+          Auth.user?.profilePicture
+            ? Auth.user?.profilePicture
+            : PICTURES_PATH + "noAvatar.png"
+        }
+        title="sara latrache"
+      />
       <SideBarRow
         Icon={LocalHospitalIcon}
         title="COVID-19 infromation Center"

@@ -104,3 +104,8 @@
 .form-control {
   margin: 10px;
 }
+.topDefault {
+  margin-top: 40px;
+  padding: 5px;
+  text-align: center;
+}
